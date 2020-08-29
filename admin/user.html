@@ -11,6 +11,11 @@
     <link rel="stylesheet" href="css/iconfont.css">
     <link rel="stylesheet" href="css/main.css">
     <script src="./libs/jquery-1.12.4.min.js"></script>
+    <script src="./js/http.js"></script>
+    <!-- 导入bootstrap的js文件 -->
+    <script src="./libs/bootstrap/js/bootstrap.min.js"></script>
+    <!-- 导入js文件 -->
+    <script src="./js/user.js"></script>
 
 </head>
 
@@ -68,6 +73,111 @@
             </form>
         </div>
     </div>
+    <!-- 模态框 -->
+    <div class="modal fade" tabindex="-1" role="dialog" id="myModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">友情提醒</h4>
+                </div>
+                <div class="modal-body">
+                    <p>One fine body&hellip;</p>
+                </div>
+                <div class="modal-footer">
+                    <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">确认</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 </body>
+<script>
+    // // 入口函数
+    // $(function () {
+    //     /* 
+    //         页面一加载：ajax请求用户数据信息
+    //     */
+    //     $.ajax({
+    //         url: BigNew.user_detail,
+    //         type: 'get',
+    //         dataType: 'json',
+    //         success: function (backData) {
+    //             console.log(backData);
+    //             // 服务器响应后渲染数据
+    //             $('.user_pic').attr('src', backData.data.userPic);
+    //             /* 在布局上 名字对应了 
+    //                 采用遍历对象快速赋值
+    //             */
+    //             for (let key in backData.data) {
+    //                 console.log(key);
+    //                 $('.' + key).val(backData.data[key]);
+    //             }; //属性值
+
+    //         }
+    //     });
+    //     // 文件预览
+    //     //1.给文件表单注册一个onchange事件
+    //     $('#exampleInputFile').change(function () {
+    //         //2.获取用户选择的文件
+    //         let file = this.files[0];
+    //         // 3.根据文件生成url
+    //         let url = URL.createObjectURL(file);
+    //         // 4.img标签src属性显示url
+    //         $('.user_pic').attr('src', url);
+    //     });
+
+
+    //     //文件上传
+    //     $('.btn-edit').click(function (e) {
+    //         // 1.阻止表单默认跳转
+    //         e.preventDefault();
+    //         // 2.使用formdata生成参数
+    //         let fd = new FormData($('form')[0]);
+    //         // 3.ajax发送请求
+        
+    //         $.ajax({
+    //             url: BigNew.user_edit,
+    //             type: 'post',
+    //             data: fd,
+    //             dataType:'json'
+    //             processData: false,
+    //             contentType: false,
+    //             success: function (backData) {
+    //                 console.log(backData);
+    //                 // 4.服务器响应之后处理：成功：刷新首页
+    //                 if (backData.code == 200) {
+    //                     // alert('修改成功');
+    //                     //(1)修改模态框文本
+    //                     $('.modal-body>p').text('修改成功');
+    //                     //(2)弹出模态框
+    //                     $('#myModal').modal();
+    //                     // (3)给模态框注册隐藏事件   手动隐藏模态
+    //                     $('#myModal').on('hidden.bs.modal', function (e) {
+    //                         // 刷新首页
+    //                         window.parent.location.reload();
+    //                     });
+
+
+    //                 } else {
+    //                     // alert(backData.msg);
+    //                     //(1)修改模态框文本
+    //                     $('.modal-body>p').text(backData.msg);
+    //                     //(2)弹出模态框
+    //                     $('#myModal').modal();
+
+    //                 }
+    //             }
+    //         });
+
+    //     });
+
+
+
+
+
+    // });
+</script>
 
 </html>
