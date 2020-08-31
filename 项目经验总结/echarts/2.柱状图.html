@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=\, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 1.导包 -->
+    <script src="./echarts.js"></script>
+</head>
+<body>
+    <!-- 2.HTMl结构 -->
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="main" style="width: 1000px;height:350px;">
+
+    <!-- 3.js初始化 -->
+    <script>
+// 基于准备好的dom，初始化echarts实例
+var myChart = echarts.init(document.getElementById('main'));
+
+// 指定图表的配置项和数据
+var option = {
+    tooltip: {
+        trigger: 'axis',
+        axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+            type: 'line'        // 默认为直线，可选为：'line' | 'shadow'
+        }
+    },
+    legend: {
+        data: ['爱生活', '趣美味', '爱旅行', '爱电影', '爱运动'],
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
+    xAxis: [
+        {
+            type: 'category',
+            data: ['一月', '二月', '三月', '四月']
+        }
+    ],
+    yAxis: [
+        {
+            type: 'value'
+        }
+    ],
+     color: ['#5885e8', '#13cfd5', '#00ce68', '#ff9565', '#20ff19'],
+    series: [
+        {
+            name: '爱生活',
+            type: 'bar',
+            data: [320, 332, 301, 334, ]
+        },
+        {
+            name:  '趣美味',
+            type: 'bar',
+        
+            data: [120, 132, 101, 134,]
+        },
+        {
+            name: '爱旅行',
+            type: 'bar',
+        
+            data: [220, 182, 191, 234, ]
+        },
+        {
+            name: '爱电影',
+            type: 'bar',
+          
+            data: [150, 232, 201, 154, ]
+        },
+        {
+            name: '爱运动',
+            type: 'bar',
+            data: [862, 1018, 964, 1026, ],
+            
+        },
+      
+       
+    ]
+};
+
+// 使用刚指定的配置项和数据显示图表。
+myChart.setOption(option);
+    </script>
+</body>
+</html>

@@ -131,118 +131,118 @@
 		{{/each}}
 	</script>
 	<script>
-		// // 入口函数
-		// $(function () {
-		// 	console.log('进入编辑');
-		// 	//1. 获取从article_list传过来的id
-		// 	let id = window.location.href.split('=')[1];
-		// 	// console.log(id);
-		// 	// 2.ajax请求数据加载文章类别
-		// 	$.ajax({
-		// 		url: BigNew.category_list,
-		// 		type: 'get',
-		// 		dataType: 'json',
-		// 		success: function (backData) {
-		// 			console.log(backData);
-		// 			if (backData.code == 200) {
-		// 				//模板引擎渲染数据
-		// 				$('select.category').html(
-		// 					template('cat_list', backData)
-		// 				);
-		// 				// 3.加载文章详细信息（ajax加载速度一样，需先加载完分类栏目再加载详细信息，否则加载类别时有时与内容不一致）
-		// 				$.ajax({
-		// 					url: BigNew.article_search,
-		// 					type: 'get',
-		// 					dataType: 'json',
-		// 					data: {
-		// 						id: id,
-		// 					},
-		// 					success: function (backData) {
-		// 						console.log(backData);
-		// 						if (backData.code == 200) {
-		// 							// 获取数据成功，把对应的数据显示在对应的标签上
-		// 							$('#inputTitle').val(backData.data.title); //文章标题
-		// 							$('.article_cover').attr(
-		// 								'src',
-		// 								backData.data.cover
-		// 							); //文章封面
-		// 							$('select.category').val(
-		// 								backData.data.categoryId
-		// 							); //时间
-		// 							editor.txt.html(backData.data.content); //内容
-		// 						}
-		// 					},
-		// 				});
-		// 			}
-		// 		},
-		// 	});
+		// 入口函数
+		$(function () {
+			console.log('进入编辑');
+			//1. 获取从article_list传过来的id
+			let id = window.location.href.split('=')[1];
+			// console.log(id);
+			// 2.ajax请求数据加载文章类别
+			$.ajax({
+				url: BigNew.category_list,
+				type: 'get',
+				dataType: 'json',
+				success: function (backData) {
+					console.log(backData);
+					if (backData.code == 200) {
+						//模板引擎渲染数据
+						$('select.category').html(
+							template('cat_list', backData)
+						);
+						// 3.加载文章详细信息（ajax加载速度不一样，需先加载完分类栏目再加载详细信息，否则加载类别时有时与内容不一致）
+						$.ajax({
+							url: BigNew.article_search,
+							type: 'get',
+							dataType: 'json',
+							data: {
+								id: id,
+							},
+							success: function (backData) {
+								console.log(backData);
+								if (backData.code == 200) {
+									// 获取数据成功，把对应的数据显示在对应的标签上
+									$('#inputTitle').val(backData.data.title); //文章标题
+									$('.article_cover').attr(
+										'src',
+										backData.data.cover
+									); //文章封面
+									$('select.category').val(
+										backData.data.categoryId
+									); //时间
+									editor.txt.html(backData.data.content); //内容
+								}
+							},
+						});
+					}
+				},
+			});
 
-		// 	/* 文件预览 */
-		// 	// 1.给file表单元素注册onchange事件
-		// 	$('#inputCover').change(function () {
-		// 		// 1.2 获取用户选择的图片
-		// 		let file = this.files[0];
-		// 		// 1.3 将文件转换为src路径
-		// 		let url = URL.createObjectURL(file);
-		// 		// 1.4 将url路径赋值给img标签的src
-		// 		$('.article_cover').attr('src', url);
-		// 	});
-		// 	/*5.编辑文章
-		//     1.细节：编辑文章接口文档参数很多，FromData只能自动获取表单中部分参数
-		//         解决方案：使用 FromData的append()方法手动添加参数
-		//     2.由于编辑按钮和草稿按钮业务逻辑相同，可以封装一个函数
-		//         解决方案：只是state参数不同，，将state作为参数传递。
-		//         也可以同时注册两个事件
-		//     /* 发布 */
-		// 	$('.btn-edit').click(function (e) {
-		// 		//阻止表单默认跳转
-		// 		e.preventDefault();
-		// 		// ajax请求
-		// 		editArticlie('已发布');
-		// 	});
-		// 	/* 存为草稿 */
-		// 	$('.btn-draft').click(function (e) {
-		// 		e.preventDefault();
-		// 		editArticlie('草稿');
-		// 	});
-		// 	//编辑文章ajax请求封装
-		// 	function editArticlie(state) {
+			/* 文件预览 */
+			// 1.给file表单元素注册onchange事件
+			$('#inputCover').change(function () {
+				// 1.2 获取用户选择的图片
+				let file = this.files[0];
+				// 1.3 将文件转换为src路径
+				let url = URL.createObjectURL(file);
+				// 1.4 将url路径赋值给img标签的src
+				$('.article_cover').attr('src', url);
+			});
+			/*5.编辑文章
+		    1.细节：编辑文章接口文档参数很多，FromData只能自动获取表单中部分参数
+		        解决方案：使用 FromData的append()方法手动添加参数
+		    2.由于编辑按钮和草稿按钮业务逻辑相同，可以封装一个函数
+		        解决方案：只是state参数不同，，将state作为参数传递。
+		        也可以同时注册两个事件
+		    /* 发布 */
+			$('.btn-edit').click(function (e) {
+				//阻止表单默认跳转
+				e.preventDefault();
+				// ajax请求
+				editArticlie('已发布');
+			});
+			/* 存为草稿 */
+			$('.btn-draft').click(function (e) {
+				e.preventDefault();
+				editArticlie('草稿');
+			});
+			//编辑文章ajax请求封装
+			function editArticlie(state) {
 
-		//         /*
-		//             注意点
-		//             a.formdata默认只能获取有name属性的表单值
-		//             b.如果formdata获取参数<接口文档参数，则可以使用append()手动追加
-		//             c.append();如果追加了重复参数，fd不会覆盖，而是全部发给服务器
-		//         */
+		        /*
+		            注意点
+		            a.formdata默认只能获取有name属性的表单值
+		            b.如果formdata获取参数<接口文档参数，则可以使用append()手动追加
+		            c.append();如果追加了重复参数，fd不会覆盖，而是全部发给服务器
+		        */
 
-		// 		// 创建fd对象
-		// 		let fd = new FormData($('#form')[0]);
-		// 		//追加一个修改后的内容
-		// 		fd.append('content', editor.txt.html());
-		// 		//追加文章id到fd中去
-		// 		fd.append('id', id);
-		// 		// 追加文章状态
-		// 		fd.append('state', state);
-		// 		// 3.发送ajax请求，完成修改
-		// 		$.ajax({
-		// 			url: BigNew.article_edit,
-		// 			type: 'post',
-		// 			data: fd,
-		// 			dataType: 'json',
-		// 			contentType: false,
-		// 			processData: false,
-		// 			success: function (backData) {
-		// 				if (backData.code == 200) {
-		// 					alert('修改成功!');
-		// 					//回退上一页
-		//                     // window.history.back();
-		//                     window.location.href= '.article_list'
-		// 				} else {
-		// 					alert(backData.msg);
-		// 				}
-		// 			},
-		// 		});
-		// 	}
-		// });
+				// 创建fd对象
+				let fd = new FormData($('#form')[0]);
+				//追加一个修改后的内容
+				fd.append('content', editor.txt.html());
+				//追加文章id到fd中去
+				fd.append('id', id);
+				// 追加文章状态
+				fd.append('state', state);
+				// 3.发送ajax请求，完成修改
+				$.ajax({
+					url: BigNew.article_edit,
+					type: 'post',
+					data: fd,
+					dataType: 'json',
+					contentType: false,
+					processData: false,
+					success: function (backData) {
+						if (backData.code == 200) {
+							alert('修改成功!');
+							//回退上一页
+		                    // window.history.back();
+		                    window.location.href= '.article_list'
+						} else {
+							alert(backData.msg);
+						}
+					},
+				});
+			}
+		});
 	</script>
 </html>
